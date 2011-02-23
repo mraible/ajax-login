@@ -157,16 +157,10 @@
                     <includes>
                         <include>**/*WebTest.java</include>
                     </includes>
-                    <systemProperties>
-                        <property>
-                            <name>javax.net.ssl.trustStore</name>
-                            <value>${project.build.directory}/ssl.keystore</value>
-                        </property>
-                        <property>
-                            <name>javax.net.ssl.trustStorePassword</name>
-                            <value>appfuse</value>
-                        </property>
-                    </systemProperties>
+                    <systemPropertyVariables>
+                      <javax.net.ssl.trustStore>${project.build.directory}/ssl.keystore</javax.net.ssl.trustStore>
+                      <javax.net.ssl.trustStorePassword>appfuse</javax.net.ssl.trustStorePassword>
+                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>

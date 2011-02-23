@@ -1,22 +1,23 @@
-<%@ include file="/taglibs.jsp"%>
+<%@ include file="/taglibs.jsp" %>
 
 <head>
     <title>Login</title>
 </head>
 
 <c:if test="${!param.ajax}">
-<p>
-    Please enter your username and password to login.
-    User user/user has a <strong>ROLE_USER</strong> role,
-    while admin/admin has an <strong>ROLE_ADMIN</strong> role. These users
-    and their encrypted passwords are stored in <em>WEB-INF/security.xml</em>.
-</p>
+    <p>
+        Please enter your username and password to login.
+        User user/user has a <strong>ROLE_USER</strong> role,
+        while admin/admin has an <strong>ROLE_ADMIN</strong> role. These users
+        and their encrypted passwords are stored in <em>WEB-INF/security.xml</em>.
+    </p>
 </c:if>
 
 <form action="<c:url value="/j_security_check"/>" id="loginForm" method="post">
-<p>
-    <c:if test="${param.error == 'true'}">
-        <div class="error">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
+    <p>
+        <c:if test="${param.error == 'true'}">
+
+    <div class="error">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
     </c:if>
 
     <label for="username" id="username-label">Username</label><br/>
@@ -27,10 +28,10 @@
 
     <input type="checkbox" name="rememberMe" id="rememberMe"/>
     <label for="rememberMe" style="vertical-align: top">Remember Me</label><br/>
-    
+
     <input type="submit" id="login" class="button" value="Login"/>
     <input type="reset" id="reset" class="button" value="Clear"/>
-</p>
+    </p>
 </form>
 
 <script type="text/javascript">
@@ -49,13 +50,10 @@
             type: "POST",
             data: $("#loginForm").serialize(),
             success: function(data, status) {
-                console.log('success: ' + status);
-                console.log('data.loggedIn:' + data.loggedIn);
                 if (data.loggedIn) {
                     // success
                     dialog.dialog('close');
-                    // todo: get cookie
-                    //location.href= getHost() + '/users';
+                    location.href = getHost() + '/users';
                 } else {
                     loginFailed(data);
                 }
