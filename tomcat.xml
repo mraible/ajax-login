@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project name="appfuse-light-tomcat" basedir="." default="war">
+    <import file="build.xml"/>
+
+    <property environment="env"/>
+    <property name="server.home" value="${env.CATALINA_HOME}"/>
+    
+    <!-- Tomcat Ant Tasks -->
+    <path id="tomcat.ant.classpath">
+        <pathelement path="${server.home}/server/lib/catalina-ant.jar"/>
+    </path>
+    
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="tomcat.ant.classpath"/>
+    <taskdef name="remove" classname="org.apache.catalina.ant.UndeployTask" classpathref="tomcat.ant.classpath"/>
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask" classpathref="tomcat.ant.classpath"/>
+    <taskdef name="start" classname="org.apache.catalina.ant.StartTask" classpathref="tomcat.ant.classpath"/>
+    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask" classpathref="tomcat.ant.classpath"/>
+    <taskdef name="list" classname="org.apache.catalina.ant.ListTask" classpathref="tomcat.ant.classpath"/>
+
+    <target name="install" description="Install application in Tomcat" depends="war">
+        <deploy url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"
+            path="/${webapp.name}"
+            war="file:${dist.dir}/${webapp.name}.war"/>
+    </target>
+
+    <target name="remove" description="Remove application from Tomcat">
+        <remove url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"
+            path="/${webapp.name}"/>
+    </target>
+
+    <target name="reload" description="Reload application in Tomcat" depends="deploy">
+        <reload url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"
+            path="/${webapp.name}"/>
+    </target>
+
+    <target name="start" description="Start Tomcat application">
+        <start url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"
+            path="/${webapp.name}"/>
+    </target>
+
+    <target name="stop" description="Stop Tomcat application">
+        <stop url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"
+            path="/${webapp.name}"/>
+    </target>
+
+    <target name="list" description="List Tomcat applications">
+        <list url="${tomcat.manager.url}"
+            username="${tomcat.manager.username}"
+            password="${tomcat.manager.password}"/>
+    </target>
+</project>

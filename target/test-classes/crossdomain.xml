@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<!-- Used for controlling cross-domain data loading in Flash -->
+<cross-domain-policy>
+  <allow-access-from domain="*" />
+</cross-domain-policy>
