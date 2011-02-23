@@ -35,11 +35,8 @@
 </form>
 
 <script type="text/javascript">
-    <c:if test="${param.ajax}">
-
+<c:if test="${param.ajax}">
     var loginFailed = function(data, status) {
-        console.log('failed:' + status)
-        console.log(data)
         $(".error").remove();
         $('#username-label').before('<div class="error">Login failed, please try again.</div>');
     };
@@ -61,6 +58,6 @@
             error: loginFailed
         });
     });
-    </c:if>
+</c:if>
     $('#username').focus();
 </script>
