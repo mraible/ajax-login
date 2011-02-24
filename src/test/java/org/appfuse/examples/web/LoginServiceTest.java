@@ -13,8 +13,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.web.context.SecurityContextRepository;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,12 +24,15 @@ public class LoginServiceTest {
 
     LoginService loginService;
     AuthenticationManager authenticationManager;
+    SecurityContextRepository repository;
 
     @Before
     public void before() {
         loginService = new LoginService();
         authenticationManager = mock(AuthenticationManager.class);
+        repository = mock(SecurityContextRepository.class);
         loginService.authenticationManager = authenticationManager;
+        loginService.repository = repository;
     }
 
     @After
