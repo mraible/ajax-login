@@ -79,7 +79,6 @@
 
     <div id="footer">
         <p>
-            <a href="http://validator.w3.org/check?uri=referer">Valid XHTML 1.0</a> |
             <a href="http://www.oswd.org/design/preview/id/2634">Theme</a> from <a href="http://www.oswd.org/">OSWD</a> |
             Design by <a href="http://www.oswd.org/user/profile/id/8377">super j man</a>
         </p>

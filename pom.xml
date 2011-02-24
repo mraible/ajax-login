@@ -58,7 +58,7 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
                 <configuration>
-                    <contextPath>/foo</contextPath>
+                    <contextPath>/</contextPath>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <!-- forwarded == true interprets x-forwarded-* headers -->
