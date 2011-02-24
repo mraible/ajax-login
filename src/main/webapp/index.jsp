@@ -90,7 +90,7 @@
 <content tag="underground">
     <h3>Assumptions</h3>
     <ul>
-        <li>It's 2010, you should be thinking about HTML5 and SOFEA.</li>
+        <li>It's 2011, you should be thinking about HTML5 and SOFEA.</li>
         <li>JRebel should be used to allow quick reloading of classes.</li>
         <li>Conventions are more important than configurability.</li>
     </ul>
@@ -123,7 +123,7 @@
     $(document).ready(function() {
         // see if the user is logged in
 
-        $.get('/login?ajax=true', function(data) {
+        $.get('${ctx}/login?ajax=true', function(data) {
             dialog.html(data);
             dialog.dialog({
                 autoOpen: false,
@@ -138,7 +138,7 @@
         });
 
         $('#status').click(function() {
-            $.ajax({url: getHost() + '/api/login.json',
+            $.ajax({url: getHost() + '${ctx}/api/login.json',
                 type: 'GET',
                 success: function(data, status) {
                     $(".status").remove();

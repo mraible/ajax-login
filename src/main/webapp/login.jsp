@@ -43,14 +43,14 @@
 
     $("#login").live('click', function(e) {
         e.preventDefault();
-        $.ajax({url: getHost() + "/api/login.json",
+        $.ajax({url: getHost() + "${ctx}/api/login.json",
             type: "POST",
             data: $("#loginForm").serialize(),
             success: function(data, status) {
                 if (data.loggedIn) {
                     // success
                     dialog.dialog('close');
-                    location.href = getHost() + '/users';
+                    location.href = getHost() + '${ctx}/users';
                 } else {
                     loginFailed(data);
                 }

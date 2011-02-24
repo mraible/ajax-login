@@ -55,6 +55,7 @@
             <p>The following is a list of resources that I used to create this project..</p>
 
             <ul class="glassList">
+                <li><a href="http://raibledesigns.com/rd/entry/implementing_ajax_authentication_using_jquery">Ajax Authentication using jQuery and Spring Security</a></li>
                 <li><a href="http://raibledesigns.com/rd/entry/integration_testing_with_http_https">Integration Testing with HTTP, HTTPS and Maven</a></li>
                 <li><a href="http://static.springsource.org/spring-security/site/reference.html">Spring Security Reference</a></li>
                 <li><a href="http://www.sitepen.com/blog/2008/07/22/windowname-transport/">window.name Transport</a></li>
