@@ -1,9 +1,4 @@
-To build this project, you'll likely need AppFuse's snapshot repository settings in your settings.xml. The easiest
-way to do this is likely to copy the contents of the following file into your ~/.m2/settings.xml.
-
-https://gist.github.com/raw/841724/a8336606b9eb30c1d98b1492e033448aad37752b/appfuse-settings.xml
-
-After doing this, you should be able to run the project using:
+To build and run this project, start Jetty using the following command:
 
 mvn jetty:run
 
