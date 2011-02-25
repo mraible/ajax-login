@@ -75,13 +75,15 @@
     $(document).ready(function() {
         // see if the user is logged in
 
-        $.get('${ctx}/login?ajax=true', function(data) {
-            dialog.html(data);
-            dialog.dialog({
-                autoOpen: false,
-                title: 'Authentication Required'
-            });
-        });
+        $.ajax({url: '${ctx}/login?ajax=true',
+            type: 'GET',
+            success: function(data) {
+                dialog.html(data);
+                dialog.dialog({
+                    autoOpen: false,
+                    title: 'Authentication Required'
+                });
+            }});
 
         $('#demo').click(function() {
             dialog.dialog('open');

@@ -43,10 +43,14 @@
 
     $("#login").live('click', function(e) {
         e.preventDefault();
-        $.ajax({url: getHost() + "${ctx}/api/login.json",
+        $.ajax({url: getHost() + "${ctx}/j_security_check",
             type: "POST",
             data: $("#loginForm").serialize(),
-            success: function(data, status) {
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            },
+            success: function(data, status, xhr) {
+                //console.log(xhr.getResponseHeader("Set-Cookie"));
                 if (data.loggedIn) {
                     // success
                     dialog.dialog('close');
