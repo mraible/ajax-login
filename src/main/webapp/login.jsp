@@ -45,6 +45,9 @@
         e.preventDefault();
         $.ajax({url: getHost() + "${ctx}/api/login.json",
             type: "POST",
+            beforeSend: function(xhr){
+                xhr.withCredentials = true;
+            },
             data: $("#loginForm").serialize(),
             success: function(data, status) {
                 if (data.loggedIn) {
