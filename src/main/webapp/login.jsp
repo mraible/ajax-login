@@ -45,10 +45,11 @@
         e.preventDefault();
         $.ajax({url: getHost() + "${ctx}/j_security_check",
             type: "POST",
-            data: $("#loginForm").serialize(),
-            beforeSend: function (xhr) {
+            beforeSend: function(xhr){
+                xhr.withCredentials = true;
                 xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             },
+            data: $("#loginForm").serialize(),
             success: function(data, status, xhr) {
                 //console.log(xhr.getResponseHeader("Set-Cookie"));
                 if (data.loggedIn) {

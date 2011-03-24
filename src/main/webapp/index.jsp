@@ -69,7 +69,6 @@
         return ((secure) ? 'https://' : 'http://') + window.location.hostname + port;
     };
 
-
     var dialog = $('<div></div>');
 
     $(document).ready(function() {
@@ -94,6 +93,9 @@
         $('#status').click(function() {
             $.ajax({url: getHost() + '${ctx}/api/login.json',
                 type: 'GET',
+                beforeSend: function(xhr){
+                    xhr.withCredentials = true;
+                },
                 success: function(data, status) {
                     $(".status").remove();
                     $("#status").after("<span class='status'> Logged In: " + data.loggedIn + "</span>");

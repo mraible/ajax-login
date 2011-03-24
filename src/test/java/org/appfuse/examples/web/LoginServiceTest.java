@@ -45,13 +45,13 @@ public class LoginServiceTest {
         context.setAuthentication(auth);
         SecurityContextHolder.setContext(context);
 
-        LoginService.LoginStatus status = loginService.getStatus();
+        LoginStatus status = loginService.getStatus();
         assertTrue(status.isLoggedIn());
     }
 
     @Test
     public void testLoginStatusFailure() {
-        LoginService.LoginStatus status = loginService.getStatus();
+        LoginStatus status = loginService.getStatus();
         assertFalse(status.isLoggedIn());
     }
 
@@ -62,7 +62,7 @@ public class LoginServiceTest {
         when(authenticationManager.authenticate(Matchers.<Authentication>anyObject())).thenReturn(auth);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        LoginService.LoginStatus status = loginService.login("foo", "bar", request, response);
+        LoginStatus status = loginService.login("foo", "bar", request, response);
         assertTrue(status.isLoggedIn());
         assertEquals("foo", status.getUsername());
     }
@@ -75,7 +75,7 @@ public class LoginServiceTest {
                 .thenThrow(new BadCredentialsException("Bad Credentials"));
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        LoginService.LoginStatus status = loginService.login("foo", "bar", request, response);
+        LoginStatus status = loginService.login("foo", "bar", request, response);
         assertFalse(status.isLoggedIn());
         assertEquals(null, status.getUsername());
     }

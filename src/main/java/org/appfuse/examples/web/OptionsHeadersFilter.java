@@ -20,20 +20,21 @@ public class OptionsHeadersFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
-            addOptionsHeaders(response);
+            addOptionsHeaders(request, response);
             return;
         } else {
-            addOptionsHeaders(response);
+            addOptionsHeaders(request, response);
         }
 
         chain.doFilter(req, res);
     }
 
-    private void addOptionsHeaders(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    private void addOptionsHeaders(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://" + request.getServerName());
         response.setHeader("Access-Control-Allow-Methods", "GET,POST");
         response.setHeader("Access-Control-Max-Age", "360");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
     public void init(FilterConfig filterConfig) {
