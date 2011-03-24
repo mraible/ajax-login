@@ -24,15 +24,12 @@ public class LoginServiceTest {
 
     LoginService loginService;
     AuthenticationManager authenticationManager;
-    SecurityContextRepository repository;
 
     @Before
     public void before() {
         loginService = new LoginService();
         authenticationManager = mock(AuthenticationManager.class);
-        repository = mock(SecurityContextRepository.class);
         loginService.authenticationManager = authenticationManager;
-        loginService.repository = repository;
     }
 
     @After

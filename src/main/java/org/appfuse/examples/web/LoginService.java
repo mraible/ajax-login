@@ -29,9 +29,6 @@ public class LoginService {
     @Qualifier("authenticationManager")
     AuthenticationManager authenticationManager;
 
-    @Autowired
-    SecurityContextRepository repository;
-
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public LoginStatus getStatus() {
@@ -56,7 +53,6 @@ public class LoginService {
         try {
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
-            repository.saveContext(SecurityContextHolder.getContext(), request, response);
             return new LoginStatus(auth.isAuthenticated(), auth.getName());
         } catch (BadCredentialsException e) {
             return new LoginStatus(false, null);
