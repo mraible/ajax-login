@@ -25,6 +25,14 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>keytool-maven-plugin</artifactId>
                 <version>1.0</version>
@@ -148,6 +156,10 @@
                     <excludes>
                         <exclude>**/*WebTest.java</exclude>
                     </excludes>
+                    <systemPropertyVariables>
+                        <javax.net.ssl.trustStore>${project.build.directory}/ssl.keystore</javax.net.ssl.trustStore>
+                        <javax.net.ssl.trustStorePassword>appfuse</javax.net.ssl.trustStorePassword>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
@@ -158,8 +170,8 @@
                         <include>**/*WebTest.java</include>
                     </includes>
                     <systemPropertyVariables>
-                      <javax.net.ssl.trustStore>${project.build.directory}/ssl.keystore</javax.net.ssl.trustStore>
-                      <javax.net.ssl.trustStorePassword>appfuse</javax.net.ssl.trustStorePassword>
+                        <javax.net.ssl.trustStore>${project.build.directory}/ssl.keystore</javax.net.ssl.trustStore>
+                        <javax.net.ssl.trustStorePassword>appfuse</javax.net.ssl.trustStorePassword>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>
@@ -363,7 +375,7 @@
         <web.framework>spring-security</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.1.0</appfuse.version>
         <jwebunit.version>2.5</jwebunit.version>
         <spring.version>3.0.5.RELEASE</spring.version>
 
@@ -390,3 +402,4 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 </project>
+

@@ -23,7 +23,7 @@
 
     <div id="header" class="clearfix">
 
-        <h1 style="cursor: pointer" onclick="location.href='${ctx}/'">AppFuse Light</h1>
+        <h1 style="cursor: pointer" onclick="location.href='${ctx}/'">Ajax Login</h1>
 
         <div id="branding">
             <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
