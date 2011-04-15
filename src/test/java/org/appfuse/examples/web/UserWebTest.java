@@ -19,10 +19,10 @@ public class UserWebTest extends WebTestCase {
         messages = ResourceBundle.getBundle("messages");
         
         beginAt("/users");
-        assertTitleEquals("Login | AppFuse Light");
+        assertTitleEquals("Login | " + messages.getString("webapp.name"));
         setTextField("j_username", "admin");
         setTextField("j_password", "admin");
-        submit("login");
+        submit();
     }
 
     @Override
@@ -31,6 +31,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testLogin() {
+       gotoPage("/users");
        assertTitleKeyMatches("userList.title");
     }
 
