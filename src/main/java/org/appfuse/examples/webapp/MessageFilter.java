@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp;
 
 import java.io.IOException;
 

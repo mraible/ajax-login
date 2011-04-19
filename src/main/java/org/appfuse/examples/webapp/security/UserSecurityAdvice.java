@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp.security;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;

@@ -1,8 +1,9 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp.user;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.appfuse.examples.webapp.user.UserController;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import static org.junit.Assert.*;

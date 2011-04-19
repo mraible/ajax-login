@@ -9,6 +9,14 @@
         <from>/</from>
         <to>/index.jsp</to>
     </rule>
+
+    <!-- HTTPS for Jetty -->
+    <!--rule>
+      <condition type="scheme" operator="notequal">https</condition>
+      <from>/users</from>
+      <to type="redirect" last="true">https://%{server-name}:8443/users</to>
+    </rule-->
+
     <rule>
         <from>/app/**</from>
         <to last="true" type="redirect">%{context-path}/$1</to>
@@ -57,9 +65,16 @@
         <from>/login</from>
         <to>/login.jsp</to>
     </rule>
-    <rule>
+    <!-- Comment out for Java EE and Shiro -->
+    <!--<rule>
         <from>/logout</from>
         <to>/logout</to>
+    </rule>-->
+
+    <!-- For Java EE Form Login -->
+    <rule>
+        <from>/login.jsp*</from>
+        <to>/login.jsp$1</to>
     </rule>
 
     <!-- Spring MVC -->

@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp.security;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,21 +13,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.web.context.SecurityContextRepository;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class LoginServiceTest {
+public class SpringSecurityLoginTest {
 
-    LoginService loginService;
+    SpringSecurityLoginService loginService;
     AuthenticationManager authenticationManager;
 
     @Before
     public void before() {
-        loginService = new LoginService();
+        loginService = new SpringSecurityLoginService();
         authenticationManager = mock(AuthenticationManager.class);
         loginService.authenticationManager = authenticationManager;
     }
@@ -45,13 +43,13 @@ public class LoginServiceTest {
         context.setAuthentication(auth);
         SecurityContextHolder.setContext(context);
 
-        LoginService.LoginStatus status = loginService.getStatus();
+        LoginStatus status = loginService.getStatus();
         assertTrue(status.isLoggedIn());
     }
 
     @Test
     public void testLoginStatusFailure() {
-        LoginService.LoginStatus status = loginService.getStatus();
+        LoginStatus status = loginService.getStatus();
         assertFalse(status.isLoggedIn());
     }
 
@@ -62,7 +60,7 @@ public class LoginServiceTest {
         when(authenticationManager.authenticate(Matchers.<Authentication>anyObject())).thenReturn(auth);
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        LoginService.LoginStatus status = loginService.login("foo", "bar", request, response);
+        LoginStatus status = loginService.login("foo", "bar");
         assertTrue(status.isLoggedIn());
         assertEquals("foo", status.getUsername());
     }
@@ -75,7 +73,7 @@ public class LoginServiceTest {
                 .thenThrow(new BadCredentialsException("Bad Credentials"));
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
-        LoginService.LoginStatus status = loginService.login("foo", "bar", request, response);
+        LoginStatus status = loginService.login("foo", "bar");
         assertFalse(status.isLoggedIn());
         assertEquals(null, status.getUsername());
     }

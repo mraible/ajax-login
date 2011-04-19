@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp.user;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

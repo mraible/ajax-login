@@ -23,14 +23,56 @@
     <name>Ajax Login Example</name>
 
     <build>
+        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>dbunit-maven-plugin</artifactId>
+                <version>1.0-beta-3</version>
+                <configuration>
+                    <dataTypeFactoryName>${dbunit.dataTypeFactoryName}</dataTypeFactoryName>
+                    <driver>${jdbc.driverClassName}</driver>
+                    <username>${jdbc.username}</username>
+                    <password>${jdbc.password}</password>
+                    <url>${jdbc.url}</url>
+                    <src>src/test/resources/sample-data.xml</src>
+                    <type>${dbunit.operation.type}</type>
+                    <schema>${dbunit.schema}</schema>
+                    <skip>${skipTests}</skip>
+                    <transaction>true</transaction>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>operation</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- Runs before integration tests and jetty:run -->
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>operation</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbc.groupId}</groupId>
+                        <artifactId>${jdbc.artifactId}</artifactId>
+                        <version>${jdbc.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -63,18 +105,30 @@
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.26</version>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.0.0.M2</version>
                 <configuration>
-                    <contextPath>/</contextPath>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <loginServices>
+                        <!--<loginService implementation="org.eclipse.jetty.security.HashLoginService">
+                            <name>Java EE Login</name>
+                            <config>${basedir}/src/test/resources/realm.properties</config>
+                        </loginService>-->
+                        <loginService implementation="org.eclipse.jetty.security.JDBCLoginService">
+                            <name>Java EE Login</name>
+                            <config>${basedir}/src/test/resources/jdbc-realm.properties</config>
+                        </loginService>
+                    </loginServices>
                     <connectors>
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <!-- forwarded == true interprets x-forwarded-* headers -->
                             <!-- http://docs.codehaus.org/display/JETTY/Configuring+mod_proxy -->
                             <forwarded>true</forwarded>
                             <port>8080</port>
                         </connector>
-                        <connector implementation="org.mortbay.jetty.security.SslSelectChannelConnector">
+                        <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
                             <forwarded>true</forwarded>
                             <port>8443</port>
                             <maxIdleTime>60000</maxIdleTime>
@@ -87,10 +141,11 @@
                     <stopPort>9999</stopPort>
                 </configuration>
                 <dependencies>
+                    <!-- MySQL for JDBC Realm -->
                     <dependency>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>jetty-sslengine</artifactId>
-                        <version>6.1.26</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.14</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -232,6 +287,10 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>glassfish-repo</id>
+            <url>http://download.java.net/maven/glassfish</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -275,13 +334,32 @@
             <artifactId>${jdbc.artifactId}</artifactId>
             <version>${jdbc.version}</version>
         </dependency>
-        <!-- Spring Web Dependencies -->
+        <!-- Servlet 3.0 -->
+        <!-- http://stackoverflow.com/questions/1979957/maven-dependency-for-servlet-3-0-api -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <!-- The following results in an error -->
+        <!-- http://hi.baidu.com/8741659422/blog/item/8410bf16104aef44f3de32b5.html -->
+        <!--<dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+        </dependency>-->
+        <!-- Spring Web Dependencies -->
         <dependency>
             <groupId>displaytag</groupId>
             <artifactId>displaytag</artifactId>
@@ -290,7 +368,7 @@
         <dependency>
             <groupId>org.springmodules</groupId>
             <artifactId>spring-modules-validation</artifactId>
-            <version>0.5</version>
+            <version>0.8</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -318,18 +396,10 @@
             <version>1.8.1</version>
             <scope>test</scope>
         </dependency>
-        <!-- Upgrade junit-dep used by jmock -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit-dep</artifactId>
-            <version>4.5</version>
-            <scope>test</scope>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.7</version>
+            <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -355,7 +425,7 @@
         <dependency>
             <groupId>org.codehaus.cargo</groupId>
             <artifactId>cargo-ant</artifactId>
-            <version>1.0.1-alpha-1</version>
+            <version>1.0.6</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -380,23 +450,15 @@
         <spring.version>3.0.5.RELEASE</spring.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
+        <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
+        <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <jdbc.groupId>com.h2database</jdbc.groupId>
         <jdbc.artifactId>h2</jdbc.artifactId>
-        <jdbc.version>1.2.145</jdbc.version>
+        <jdbc.version>1.3.154</jdbc.version>
         <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-        <jdbc.url>jdbc:h2:/tmp/appfuse_light;MVCC=TRUE</jdbc.url>
+        <jdbc.url>jdbc:h2:/tmp/ajax_login;MVCC=TRUE</jdbc.url>
         <jdbc.username>sa</jdbc.username>
-
-        <!-- Cargo settings -->
-        <cargo.container>tomcat6x</cargo.container>
-        <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>
-            http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.zip
-        </cargo.container.url>
-        <cargo.host>localhost</cargo.host>
-        <cargo.port>25888</cargo.port>
-        <cargo.wait>false</cargo.wait>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

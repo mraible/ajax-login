@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp;
 
 import net.sourceforge.jwebunit.html.Table;
 import net.sourceforge.jwebunit.html.Row;
@@ -19,6 +19,14 @@ public class UserWebTest extends WebTestCase {
         messages = ResourceBundle.getBundle("messages");
         
         beginAt("/users");
+        formLogin();
+    }
+
+    private void basicLogin() {
+        tester.getTestContext().setAuthorization("admin", "admin");
+    }
+
+    private void formLogin() {
         assertTitleEquals("Login | " + messages.getString("webapp.name"));
         setTextField("j_username", "admin");
         setTextField("j_password", "admin");

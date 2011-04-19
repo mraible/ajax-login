@@ -13,11 +13,13 @@
     </p>
 </c:if>
 
-<form action="<c:url value="/j_security_check"/>" id="loginForm" method="post">
+<form action="" id="loginForm" method="post">
     <p>
-        <c:if test="${param.error == 'true'}">
-
-    <div class="error">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
+    <c:if test="${param.error == 'true'}">
+        <div class="error">Login Failed. ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
+    </c:if>
+    <c:if test="${not empty shiroLoginFailure}">
+        <div class="error">${shiroLoginFailure}</div>
     </c:if>
 
     <label for="username" id="username-label">Username</label><br/>

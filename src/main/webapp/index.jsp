@@ -65,7 +65,7 @@
     var secure = true;
 
     var getHost = function() {
-        var port = (window.location.port == "8080") ? ":8443" : "";
+        var port = (window.location.port == "8080" || window.location.port == "8443") ? ":8443" : "";
         return ((secure) ? 'https://' : 'http://') + window.location.hostname + port;
     };
 

@@ -1,4 +1,4 @@
-package org.appfuse.examples.web;
+package org.appfuse.examples.webapp.user;
 
 import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;

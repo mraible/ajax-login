@@ -37,9 +37,15 @@
 
         <div id="main">
             <h1><decorator:title/></h1>
-            <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+            <%--<security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
                 <div class="logout"><a href="${ctx}/logout">Logout</a></div>
-            </security:authorize>
+            </security:authorize>--%>
+            <shiro:authenticated>
+                <div class="logout"><a href="${ctx}/logout">Logout</a></div>
+            </shiro:authenticated>
+            <%--<c:if test="${not empty pageContext.request.remoteUser}">
+                <div class="logout"><a href="${ctx}/logout">Logout</a></div>
+            </c:if>--%>
             <div id="body">
                 <%@ include file="/messages.jsp"%>
                 <decorator:body/>
