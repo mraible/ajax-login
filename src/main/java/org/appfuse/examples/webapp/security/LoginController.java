@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     @Autowired
-    @Qualifier("shiroLoginService")
+    @Qualifier("springLoginService")
     LoginService loginService;
 
     @RequestMapping(method = RequestMethod.GET)

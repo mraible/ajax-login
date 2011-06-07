@@ -9,34 +9,21 @@
     <!-- <http pattern="/css/**" security="none"/> -->
 
     <http auto-config="true">
-        <intercept-url pattern="/app/users" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/app/users" access="ROLE_USER,ROLE_ADMIN" requires-channel="https"/>
+        <form-login login-page="/login" authentication-failure-url="/login?error=true"
+                  login-processing-url="/j_security_check"/>
         <http-basic/>
-        <!--<remember-me user-service-ref="userDao" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>-->
+        <logout logout-url="/logout"/>
+        <remember-me user-service-ref="userService" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
     </http>
 
-
-    <!--http auto-config="false" lowercase-comparisons="false">
-        <intercept-url pattern="/images/**" filters="none"/>
-        <intercept-url pattern="/styles/**" filters="none"/>
-        <intercept-url pattern="/scripts/**" filters="none"/>
-        <intercept-url pattern="/app/api/login.json" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER" requires-channel="https"/>
-        <intercept-url pattern="/app/users" access="ROLE_ADMIN" requires-channel="https"/>
-        <intercept-url pattern="/app/**" access="ROLE_ADMIN,ROLE_USER" requires-channel="any"/>
-        <form-login login-page="/login" authentication-failure-url="/login?error=true"
-                    login-processing-url="/j_security_check"/>
-        <logout logout-url="/logout"/>
-        <session-management session-fixation-protection="newSession" >
-            <concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
-        </session-management>
-    </http-->
-
     <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDao">
+        <authentication-provider>
             <password-encoder hash="sha"/>
-            <!--<user-service>
+            <user-service id="userService">
                 <user name="user" password="12dea96fec20593566ab75692c9949596833adc9" authorities="ROLE_USER"/>
                 <user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/>
-            </user-service>-->
+            </user-service>
         </authentication-provider>
     </authentication-manager>
 

@@ -65,11 +65,6 @@
         <from>/login</from>
         <to>/login.jsp</to>
     </rule>
-    <!-- Comment out for Java EE and Shiro -->
-    <!--<rule>
-        <from>/logout</from>
-        <to>/logout</to>
-    </rule>-->
 
     <!-- For Java EE Form Login -->
     <rule>

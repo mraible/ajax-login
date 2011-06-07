@@ -116,10 +116,10 @@
                             <name>Java EE Login</name>
                             <config>${basedir}/src/test/resources/realm.properties</config>
                         </loginService>-->
-                        <loginService implementation="org.eclipse.jetty.security.JDBCLoginService">
+                        <!--loginService implementation="org.eclipse.jetty.security.JDBCLoginService">
                             <name>Java EE Login</name>
                             <config>${basedir}/src/test/resources/jdbc-realm.properties</config>
-                        </loginService>
+                        </loginService-->
                     </loginServices>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
@@ -137,16 +137,14 @@
                             <keyPassword>appfuse</keyPassword>
                         </connector>
                     </connectors>
-                    <stopKey>appfuse</stopKey>
-                    <stopPort>9999</stopPort>
                 </configuration>
                 <dependencies>
                     <!-- MySQL for JDBC Realm -->
-                    <dependency>
+                    <!--dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
                         <version>5.1.14</version>
-                    </dependency>
+                    </dependency-->
                 </dependencies>
                 <executions>
                     <execution>
@@ -342,6 +340,13 @@
             <version>3.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- The following results in an error -->
+        <!-- http://hi.baidu.com/8741659422/blog/item/8410bf16104aef44f3de32b5.html -->
+        <!--<dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -352,13 +357,6 @@
             <artifactId>shiro-web</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!-- The following results in an error -->
-        <!-- http://hi.baidu.com/8741659422/blog/item/8410bf16104aef44f3de32b5.html -->
-        <!--<dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-        </dependency>-->
         <!-- Spring Web Dependencies -->
         <dependency>
             <groupId>displaytag</groupId>

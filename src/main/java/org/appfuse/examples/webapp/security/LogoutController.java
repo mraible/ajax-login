@@ -1,7 +1,5 @@
 package org.appfuse.examples.webapp.security;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +19,10 @@ public class LogoutController {
 
     @RequestMapping(method = RequestMethod.GET)
     public void logout(HttpServletResponse response) throws ServletException, IOException {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        /*request.logout();*/
+        // Shiro Logout Implementation
+        //Subject subject = SecurityUtils.getSubject();
+        //subject.logout();
+        request.logout();
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath());
     }

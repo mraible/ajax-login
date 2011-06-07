@@ -13,7 +13,7 @@
     </p>
 </c:if>
 
-<form action="" id="loginForm" method="post">
+<form action="${ctx}/j_security_check" id="loginForm" method="post">
     <p>
     <c:if test="${param.error == 'true'}">
         <div class="error">Login Failed. ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
@@ -28,7 +28,7 @@
     <label for="password">Password</label><br/>
     <input id="password" type="password" name="j_password"/><br/>
 
-    <input type="checkbox" name="rememberMe" id="rememberMe"/>
+    <input type="checkbox" name="_spring_security_remember_me" id="rememberMe"/>
     <label for="rememberMe" style="vertical-align: top">Remember Me</label><br/>
 
     <input type="submit" id="login" class="button" value="Login"/>
@@ -47,7 +47,7 @@
         e.preventDefault();
         $.ajax({url: getHost() + "${ctx}/api/login.json",
             type: "POST",
-            beforeSend: function(xhr){
+            beforeSend: function(xhr) {
                 xhr.withCredentials = true;
             },
             data: $("#loginForm").serialize(),
