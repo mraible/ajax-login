@@ -26,7 +26,7 @@ public class JavaEELoginService implements LoginService {
     @Override
     public LoginStatus login(String username, String password) {
         try {
-            if (request.getRemoteUser() != null) {
+            if (request.getRemoteUser() == null) {
                 request.login(username, password);
                 log.debug("Login succeeded!");
             }
