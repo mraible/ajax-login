@@ -22,7 +22,7 @@ public class LogoutController {
         // Shiro Logout Implementation
         //Subject subject = SecurityUtils.getSubject();
         //subject.logout();
-        request.logout();
+        //request.logout();
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath());
     }
