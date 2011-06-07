@@ -170,18 +170,6 @@
         </user-data-constraint>
     </security-constraint>
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>userform</web-resource-name>
-            <url-pattern>/userform</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>ROLE_ADMIN</role-name>
-        </auth-constraint>
-    </security-constraint>
-
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>Java EE Login</realm-name>
