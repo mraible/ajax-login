@@ -6,7 +6,8 @@
 
 <p>Please fill in user's information below:</p>
 
-<form:form commandName="user" method="post" action="userform" onsubmit="return validateUser(this)" id="userForm">
+<form:form commandName="user" method="post" action="userform" onsubmit="return validateUser(this)" id="userForm"
+        autocomplete="off">
 <form:errors path="*" cssClass="error"/>
 <form:hidden path="id"/>
 <form:hidden path="version"/>
