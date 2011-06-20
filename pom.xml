@@ -110,6 +110,7 @@
                 <configuration>
                     <webAppConfig>
                         <contextPath>/</contextPath>
+                        <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
                     </webAppConfig>
                     <loginServices>
                         <!--<loginService implementation="org.eclipse.jetty.security.HashLoginService">
