@@ -11,10 +11,11 @@
     <http auto-config="true">
         <intercept-url pattern="/app/users" access="ROLE_USER,ROLE_ADMIN" requires-channel="https"/>
         <form-login login-page="/login" authentication-failure-url="/login?error=true"
-                  login-processing-url="/j_security_check"/>
+                    login-processing-url="/j_security_check"/>
         <http-basic/>
         <logout logout-url="/logout"/>
-        <remember-me user-service-ref="userService" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
+        <remember-me user-service-ref="userService" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"
+                     use-secure-cookie="true"/>
     </http>
 
     <authentication-manager alias="authenticationManager">
