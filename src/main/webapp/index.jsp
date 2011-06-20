@@ -40,8 +40,7 @@
     </p>
 
     <p>To login normally, click on the "Users" tab above and enter your credentials when prompted. To login
-        using Ajax, click on the "View Demonstration" button below and use admin/admin to login. The Ajax login is not
-        persistent yet, but I hope to fix that soon.
+        using Ajax, click on the "View Demonstration" button below and use admin/admin to login. 
     </p>
 
     <p>
