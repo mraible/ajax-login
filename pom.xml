@@ -290,6 +290,10 @@
             <id>glassfish-repo</id>
             <url>http://download.java.net/maven/glassfish</url>
         </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <url>http://s3.amazonaws.com/maven.springframework.org/milestone</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -384,6 +388,26 @@
                 <exclusion>
                     <groupId>rhino</groupId>
                     <artifactId>js</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth</artifactId>
+            <version>1.0.0.M3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
