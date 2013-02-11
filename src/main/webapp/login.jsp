@@ -20,5 +20,35 @@
 
     <input type="submit" class="btn btn-primary" name="login" id="login" tabindex="4" value="Login">
 </form>
-</body>
 
+<script type="text/javascript">
+<c:if test="${param.ajax}">
+    var loginFailed = function(data, status) {
+        $(".error").remove();
+        $('#username-label').before('<div class="alert alert-warning">Login failed, please try again.</div>');
+    };
+
+    $("#login").live('click', function(e) {
+        e.preventDefault();
+        $.ajax({url: getHost() + "${ctx}/api/login.json",
+            type: "POST",
+            beforeSend: function(xhr) {
+                xhr.withCredentials = true;
+            },
+            data: $("#loginForm").serialize(),
+            success: function(data, status) {
+                if (data.loggedIn) {
+                    // success
+                    dialog.dialog('close');
+                    location.href = getHost() + '${ctx}/users';
+                } else {
+                    loginFailed(data);
+                }
+            },
+            error: loginFailed
+        });
+    });
+</c:if>
+    $('#username').focus();
+</script>
+</body>
