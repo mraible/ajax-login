@@ -25,7 +25,7 @@
 <c:if test="${param.ajax}">
     var loginFailed = function(data, status) {
         $(".error").remove();
-        $('#username-label').before('<div class="error">Login failed, please try again.</div>');
+        $('#username-label').before('<div class="alert alert-warning">Login failed, please try again.</div>');
     };
 
     $("#login").live('click', function(e) {
