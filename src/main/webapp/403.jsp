@@ -3,7 +3,7 @@
 <page:applyDecorator name="default">
 
 <title>403 ~ Access Denied</title>
-<content tag="heading">Access Denied</content>
+<h2>Access Denied</h2>
 
 <p>
     Your current role does not allow you to view this page.  Please contact your system
