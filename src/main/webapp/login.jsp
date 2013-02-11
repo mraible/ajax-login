@@ -24,8 +24,8 @@
 <script type="text/javascript">
 <c:if test="${param.ajax}">
     var loginFailed = function(data, status) {
-        $(".error").remove();
-        $('#username-label').before('<div class="alert alert-warning">Login failed, please try again.</div>');
+        $(".alert").remove();
+        $('#j_username').before('<div class="alert alert-error">Login failed, please try again.</div>');
     };
 
     $("#login").live('click', function(e) {
@@ -49,6 +49,5 @@
         });
     });
 </c:if>
-    $('#username').focus();
 </script>
 </body>
