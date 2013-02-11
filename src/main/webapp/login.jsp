@@ -8,13 +8,18 @@
 
 <form method="post" id="loginForm" class="form-signin" action="${ctx}/j_security_check">
     <h2 class="form-signin-heading">Sign In</h2>
+
+    <c:if test="${param.error == 'true'}">
+        <div class="alert alert-error">Login Failed. ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</div>
+    </c:if>
+
     <input type="text" name="j_username" id="j_username" class="input-block-level"
            placeholder="Username" required tabindex="1" autofocus>
     <input type="password" class="input-block-level" name="j_password" id="j_password" tabindex="2"
            placeholder="Password" required>
 
     <label class="checkbox" for="rememberMe">
-        <input type="checkbox" class="checkbox" name="rememberMe" id="rememberMe" tabindex="3"/>
+        <input type="checkbox" class="checkbox" name="_spring_security_remember_me" id="rememberMe" tabindex="3"/>
         Remember Me
     </label>
 
@@ -24,8 +29,8 @@
 <script type="text/javascript">
 <c:if test="${param.ajax}">
     var loginFailed = function(data, status) {
-        $(".error").remove();
-        $('#username-label').before('<div class="alert alert-warning">Login failed, please try again.</div>');
+        $(".alert").remove();
+        $('#j_username').before('<div class="alert alert-error">Login failed, please try again.</div>');
     };
 
     $("#login").live('click', function(e) {
@@ -37,6 +42,7 @@
             },
             data: $("#loginForm").serialize(),
             success: function(data, status) {
+                console.log(data)
                 if (data.loggedIn) {
                     // success
                     dialog.dialog('close');
@@ -49,6 +55,5 @@
         });
     });
 </c:if>
-    $('#username').focus();
 </script>
 </body>

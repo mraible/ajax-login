@@ -111,16 +111,6 @@
                     <webAppConfig>
                         <contextPath>/</contextPath>
                     </webAppConfig>
-                    <loginServices>
-                        <!--<loginService implementation="org.eclipse.jetty.security.HashLoginService">
-                            <name>Java EE Login</name>
-                            <config>${basedir}/src/test/resources/realm.properties</config>
-                        </loginService>-->
-                        <loginService implementation="org.eclipse.jetty.security.JDBCLoginService">
-                            <name>Java EE Login</name>
-                            <config>${basedir}/src/test/resources/jdbc-realm.properties</config>
-                        </loginService>
-                    </loginServices>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <!-- forwarded == true interprets x-forwarded-* headers -->

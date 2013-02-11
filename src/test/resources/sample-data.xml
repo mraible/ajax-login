@@ -44,7 +44,7 @@
         <row>
             <value description="id">-2</value>
             <value description="username">admin</value>
-            <value description="password">ce3de0a1a80a81f6ef708d8e30c6753f4cf5b461</value>
+            <value description="password">ce3de0a1a80a81f6ef708d8e30c6753f4cf5b461</value> <!-- adminjdbc -->
             <value description="first_name">Matt</value>
             <value description="last_name">Raible</value>
             <value description="address"></value>

@@ -5,7 +5,7 @@
          metadata-complete="true"
          version="3.0">
 
-    <display-name>Ajax Login</display-name>
+    <display-name>Spring Security Login</display-name>
 
     <!-- [INSERT FRAGMENT HERE] -->
     <!-- Define the basename for a resource bundle for I18N -->
@@ -72,7 +72,7 @@
             classpath:/applicationContext-resources.xml
             classpath:/applicationContext-dao.xml
             classpath:/applicationContext-service.xml
-            /WEB-INF/applicationContext*.xml,
+            /WEB-INF/applicationContext*.xml
             /WEB-INF/security.xml
         </param-value>
     </context-param>
