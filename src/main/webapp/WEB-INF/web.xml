@@ -2,6 +2,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         metadata-complete="true"
          version="3.0">
 
     <display-name>Ajax Login</display-name>
@@ -36,21 +37,6 @@
         <filter-class>org.appfuse.examples.webapp.MessageFilter</filter-class>
     </filter>
 
-    <!--<filter>
-        <filter-name>lazyLoadingFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-    </filter>-->
-    <!-- Use "org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter" if you're using JPA -->
-
-    <filter>
-        <filter-name>securityFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>springSecurityFilterChain</param-value>
-        </init-param>
-    </filter>
-
     <filter>
         <filter-name>rewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
@@ -78,7 +64,6 @@
             classpath:/applicationContext-dao.xml
             classpath:/applicationContext-service.xml
             /WEB-INF/applicationContext*.xml
-            /WEB-INF/security.xml
         </param-value>
     </context-param>
 
@@ -109,13 +94,6 @@
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>securityFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>exportFilter</filter-name>
@@ -173,13 +151,4 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
-
-    <session-config>
-        <session-timeout>15</session-timeout>
-        <cookie-config>
-            <http-only>true</http-only>
-            <secure>true</secure>
-        </cookie-config>
-        <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
 </web-app>

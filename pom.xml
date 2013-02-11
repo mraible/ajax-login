@@ -19,7 +19,7 @@
     <artifactId>ajax-login</artifactId>
     <groupId>org.appfuse.examples</groupId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <name>Ajax Login Example</name>
 
     <build>
@@ -27,10 +27,10 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -74,79 +74,16 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>keytool-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <id>clean</id>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <id>genkey</id>
-                        <goals>
-                            <goal>genkey</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keystore>${project.build.directory}/ssl.keystore</keystore>
-                    <dname>cn=localhost</dname>
-                    <keypass>appfuse</keypass>
-                    <storepass>appfuse</storepass>
-                    <alias>appfuse</alias>
-                    <keyalg>RSA</keyalg>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.0.0.M3</version>
+                <version>8.1.9.v20130131</version>
                 <configuration>
                     <webAppConfig>
                         <contextPath>/</contextPath>
-                        <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
                     </webAppConfig>
-                    <loginServices>
-                        <!--<loginService implementation="org.eclipse.jetty.security.HashLoginService">
-                            <name>Java EE Login</name>
-                            <config>${basedir}/src/test/resources/realm.properties</config>
-                        </loginService>-->
-                        <!--loginService implementation="org.eclipse.jetty.security.JDBCLoginService">
-                            <name>Java EE Login</name>
-                            <config>${basedir}/src/test/resources/jdbc-realm.properties</config>
-                        </loginService-->
-                    </loginServices>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <!-- forwarded == true interprets x-forwarded-* headers -->
-                            <!-- http://docs.codehaus.org/display/JETTY/Configuring+mod_proxy -->
-                            <forwarded>true</forwarded>
-                            <port>8080</port>
-                        </connector>
-                        <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
-                            <forwarded>true</forwarded>
-                            <port>8443</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                            <keystore>${project.build.directory}/ssl.keystore</keystore>
-                            <password>appfuse</password>
-                            <keyPassword>appfuse</keyPassword>
-                        </connector>
-                    </connectors>
                 </configuration>
-                <dependencies>
-                    <!-- MySQL for JDBC Realm -->
-                    <!--dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.14</version>
-                    </dependency-->
-                </dependencies>
                 <executions>
                     <execution>
                         <id>start-jetty</id>
@@ -286,14 +223,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>glassfish-repo</id>
-            <url>http://download.java.net/maven/glassfish</url>
-        </repository>
-        <repository>
-            <id>spring-milestone</id>
-            <url>http://s3.amazonaws.com/maven.springframework.org/milestone</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -338,29 +267,11 @@
             <version>${jdbc.version}</version>
         </dependency>
         <!-- Servlet 3.0 -->
-        <!-- http://stackoverflow.com/questions/1979957/maven-dependency-for-servlet-3-0-api -->
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.servlet</artifactId>
-            <version>3.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- The following results in an error -->
-        <!-- http://hi.baidu.com/8741659422/blog/item/8410bf16104aef44f3de32b5.html -->
-        <!--<dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-        </dependency>-->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.1.0</version>
         </dependency>
         <!-- Spring Web Dependencies -->
         <dependency>
@@ -392,24 +303,16 @@
             </exclusions>
         </dependency>
 
+        <!-- UI Dependencies -->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth</artifactId>
-            <version>1.0.0.M3</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>1.9.2</version>
         </dependency>
 
         <!-- Testing Dependencies -->
@@ -434,6 +337,10 @@
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
                     <artifactId>logback-classic</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -470,7 +377,7 @@
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0</appfuse.version>
         <jwebunit.version>2.5</jwebunit.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.1.3.RELEASE</spring.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>

@@ -62,6 +62,10 @@
         <to>/robots.txt</to>
     </rule>
     <rule>
+        <from>/webjars/**</from>
+        <to>/webjars/$1</to>
+    </rule>
+    <rule>
         <from>/login*</from>
         <to>/login.jsp$1</to>
     </rule>

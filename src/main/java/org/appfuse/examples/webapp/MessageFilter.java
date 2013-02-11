@@ -21,14 +21,11 @@ public class MessageFilter implements Filter {
         // this is so they're not lost in a redirect
         Object message = request.getSession().getAttribute("message");
 
-        if (message != null) {
+        if (!request.getRequestURI().startsWith("/app") && message != null) {
             request.setAttribute("message", message);
             request.getSession().removeAttribute("message");
         }
 
-        // set the requestURL as a request attribute for templates
-        // particularly freemarker, which doesn't allow request.getRequestURL()
-        request.setAttribute("requestURL", request.getRequestURL());
         chain.doFilter(req, res);
     }
 

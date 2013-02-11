@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.appfuse.model.User;
-import org.appfuse.service.UserExistsException;
 import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -17,7 +16,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -82,12 +80,7 @@ public class UserFormController {
             request.getSession().setAttribute("message",
                     getText("user.deleted", user.getFullName()));
         } else {
-            try {
-                userManager.saveUser(user);
-            } catch (UserExistsException uex) {
-                result.addError(new ObjectError("user", uex.getMessage()));
-                return "userform";
-            }
+            userManager.saveUser(user);
             request.getSession().setAttribute("message",
                     getText("user.saved", user.getFullName()));
         }
