@@ -42,7 +42,6 @@
             },
             data: $("#loginForm").serialize(),
             success: function(data, status) {
-                console.log(data)
                 if (data.loggedIn) {
                     // success
                     dialog.dialog('close');
