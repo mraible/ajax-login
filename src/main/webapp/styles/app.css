@@ -1,0 +1,194 @@
+body {
+    padding-top: 50px;
+}
+
+body > .navbar .brand {
+    color: #000000;
+    font-weight: bold;
+    margin-left: 0;
+    margin-right: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+}
+
+.tagline {
+    padding-top: 10px;
+}
+
+#footer {
+    padding: 10px;
+    border-top: 1px dotted silver;
+    opacity: .7;
+}
+
+div.exportlinks {
+    margin: -5px 0 10px 5px;
+    padding: 2px 4px 2px 0;
+    width: 100%;
+}
+
+div.exportlinks span {
+    background-repeat: no-repeat;
+}
+
+span.export {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 4px 1px 0;
+}
+
+span.pagebanner {
+    display: block;
+    margin: 10px 0 10px 0;
+    padding: 2px 4px 2px 0;
+}
+
+span.pagelinks {
+    display: block;
+    font-size: .95em;
+    margin-bottom: 5px;
+    margin-top: -32px;
+    padding: 2px 0 2px 0;
+    text-align: right;
+    width: 100%;
+}
+
+th.sorted a, th.sortable a {
+    background-position: right;
+    display: block;
+}
+
+.table th.order1 a {
+    background-image: url(../images/arrow_down.png) !important;
+}
+
+.table th.order2 a {
+    background-image: url(../images/arrow_up.png) !important;
+}
+
+.table th.sorted {
+    background-color: #ffd;
+    color: #000000;
+}
+
+.table th.sorted a, .table th.sortable a {
+    background-position: right;
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.table tr.even {
+    background: #eee;
+    border-top: 1px solid #c0c0c0;
+    color: #000000;
+}
+
+.table tr.odd {
+    background: #fff;
+    border-top: 1px solid #c0c0c0;
+    color: #000000;
+}
+
+/* highlight .table row onmouseover */
+.table tr.over, .table tr:hover {
+    border-bottom: 1px solid #C0C0C0;
+    border-top: 1px solid #C0C0C0;
+    color: #000000;
+    cursor: pointer;
+    background: #ffd;
+}
+
+/* FORMS */
+
+.well.form-horizontal .form-actions {
+    margin-bottom: 0;
+}
+
+.btn-group {
+    margin-bottom: 10px;
+}
+
+.btn-group .btn, .form-actions .btn {
+    margin-left: 5px;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 20px 10px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.form-signin .form-signin-heading {
+    margin: 0 0 20px 0;
+}
+
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+/* Desktop large
+------------------------- */
+@media (min-width: 1200px) {
+
+}
+
+/* Desktop
+------------------------- */
+@media (max-width: 980px) {
+
+}
+
+/* Tablet to desktop
+------------------------- */
+@media (min-width: 768px) and (max-width: 980px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+}
+
+/* Tablet
+------------------------- */
+@media (max-width: 767px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+}
+
+/* Landscape phones
+------------------------- */
+@media (max-width: 480px) {
+    body {
+        padding-top: 0;
+    }
+
+    body > .navbar .brand {
+        margin-left: 10px;
+    }
+
+    #search {
+        float: none;
+        margin-top: 0;
+    }
+}

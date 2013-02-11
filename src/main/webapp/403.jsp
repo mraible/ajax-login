@@ -10,7 +10,10 @@
     administrator if you believe you should have access.  In the meantime, how about a pretty
     picture to cheer you up?
 </p>
-<p style="text-align: center; margin-top: 20px">
-    <img style="border: 0" src="${pageContext.request.contextPath}/images/403.jpg" alt="Hawaii" />
+
+<p style="text-align: center">
+    <a href="http://www.flickr.com/photos/mcginityphoto/6716289593/" title="Tetons view across meadow by McGinityPhoto, on Flickr">
+        <img src="http://farm8.staticflickr.com/7019/6716289593_d3aa14b86f_z.jpg" width="640" height="427"
+        alt="Tetons view across meadow" style="margin: 20px; border: 1px solid black"></a>
 </p>
 </page:applyDecorator>
