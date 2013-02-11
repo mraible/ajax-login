@@ -40,15 +40,9 @@
                         <li><a href="${ctx}/" title="Home">Home</a></li>
                         <li><a href="${ctx}/users" title="View Users">Users</a></li>
                         <!-- Add new menu items here -->
-                        <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
-                            <div class="logout"><a href="${ctx}/logout">Logout</a></div>
-                        </security:authorize>
-                        <%--shiro:authenticated>
-                            <div class="logout"><a href="${ctx}/logout">Logout</a></div>
-                        </shiro:authenticated--%>
-                        <%--<c:if test="${not empty pageContext.request.remoteUser}">
-                            <div class="logout"><a href="${ctx}/logout">Logout</a></div>
-                        </c:if>--%>
+                        <c:if test="${not empty pageContext.request.remoteUser}">
+                            <li><a href="${ctx}/logout">Logout</a></li>
+                        </c:if>
                     </ul>
                 </div>
                 <div class="pull-right tagline">

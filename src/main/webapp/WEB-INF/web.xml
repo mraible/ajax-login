@@ -56,6 +56,15 @@
         <filter-class>org.appfuse.examples.webapp.security.OptionsHeadersFilter</filter-class>
     </filter>
 
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSecurityFilterChain</param-value>
+        </init-param>
+    </filter>
+
     <!-- Context Configuration locations for Spring XML files -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -63,7 +72,8 @@
             classpath:/applicationContext-resources.xml
             classpath:/applicationContext-dao.xml
             classpath:/applicationContext-service.xml
-            /WEB-INF/applicationContext*.xml
+            /WEB-INF/applicationContext*.xml,
+            /WEB-INF/security.xml
         </param-value>
     </context-param>
 
@@ -94,6 +104,13 @@
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>exportFilter</filter-name>
@@ -151,37 +168,4 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
-
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>users</web-resource-name>
-            <url-pattern>/users</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>ROLE_USER</role-name>
-            <role-name>ROLE_ADMIN</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <realm-name>Java EE Login</realm-name>
-        <form-login-config>
-            <form-login-page>/login.jsp</form-login-page>
-            <form-error-page>/login.jsp?error=true</form-error-page>
-        </form-login-config>
-    </login-config>
-
-    <security-role>
-        <role-name>ROLE_USER</role-name>
-    </security-role>
-
-    <security-role>
-        <role-name>ROLE_ADMIN</role-name>
-    </security-role>
 </web-app>
