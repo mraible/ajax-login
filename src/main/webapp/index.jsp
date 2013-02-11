@@ -44,21 +44,21 @@
     </p>
 
     <p>
-        <button class="button" id="demo">View Demonstration</button>
-        <button class="button" id="status">Status</button>
+        <button class="btn btn-primary" id="demo">View Demonstration</button>
+        <button class="btn" id="status">Status</button>
     </p>
 </div>
 
 <content tag="underground">
     <h3>Assumptions</h3>
     <ul>
-        <li>It's 2011, you should be thinking about HTML5 and SOFEA.</li>
+        <li>It's 2013, you should be thinking about HTML5, Mobile and REST.</li>
         <li>JRebel should be used to allow quick reloading of classes.</li>
         <li>Conventions are more important than configurability.</li>
     </ul>
 </content>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+<script type="text/javascript" src="${ctx}/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+<link rel="stylesheet" href="${ctx}/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.css">
 <script type="text/javascript">
 
     var secure = true;
@@ -77,6 +77,7 @@
         $.get('${ctx}/login?ajax=true', function(data) {
             dialog.html(data);
             dialog.dialog({
+                width: 400,
                 autoOpen: false,
                 title: 'Authentication Required'
             });

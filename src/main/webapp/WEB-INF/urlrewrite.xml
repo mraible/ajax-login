@@ -2,7 +2,7 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
     "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
-<urlrewrite default-match-type="wildcard">
+<urlrewrite default-match-type="wildcard" use-query-string="true">
 
     <!-- Add rules here for anything that shouldn't be served up by Spring MVC. -->
     <rule>
@@ -62,15 +62,22 @@
         <to>/robots.txt</to>
     </rule>
     <rule>
-        <from>/login</from>
-        <to>/login.jsp</to>
+        <from>/webjars/**</from>
+        <to>/webjars/$1</to>
     </rule>
-
+    <rule>
+        <from>/login*</from>
+        <to>/login.jsp$1</to>
+    </rule>
     <!-- For Java EE Form Login -->
     <rule>
         <from>/login.jsp*</from>
         <to>/login.jsp$1</to>
     </rule>
+    <!--<rule>
+        <from>/logout</from>
+        <to>/logout</to>
+    </rule>-->
 
     <!-- Spring MVC -->
     <rule>
