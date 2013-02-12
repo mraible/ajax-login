@@ -58,11 +58,8 @@
 
     <filter>
         <filter-name>securityFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>springSecurityFilterChain</param-value>
-        </init-param>
+        <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+        <!-- no init-param means shiro.ini is loaded from WEB-INF classpath -->
     </filter>
 
     <!-- Context Configuration locations for Spring XML files -->
@@ -73,7 +70,6 @@
             classpath:/applicationContext-dao.xml
             classpath:/applicationContext-service.xml
             /WEB-INF/applicationContext*.xml
-            /WEB-INF/security.xml
         </param-value>
     </context-param>
 
@@ -116,6 +112,10 @@
         <filter-name>exportFilter</filter-name>
         <url-pattern>/app/*</url-pattern>
     </filter-mapping>
+
+    <listener>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+    </listener>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -67,12 +67,7 @@
     </rule>
     <rule>
         <from>/login*</from>
-        <to>/login.jsp$1</to>
-    </rule>
-    <!-- For Java EE Form Login -->
-    <rule>
-        <from>/login.jsp*</from>
-        <to>/login.jsp$1</to>
+        <to>/login.jsp</to>
     </rule>
     <!--<rule>
         <from>/logout</from>
