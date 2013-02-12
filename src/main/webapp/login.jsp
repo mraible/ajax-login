@@ -6,7 +6,7 @@
     Please enter your username and password to login.
 </p>
 
-<form method="post" id="loginForm" class="form-signin" action="${ctx}/j_security_check">
+<form method="post" id="loginForm" class="form-signin" action="${ctx}/j_security_check" autocomplete="off">
     <h2 class="form-signin-heading">Sign In</h2>
 
     <c:if test="${param.error == 'true'}">

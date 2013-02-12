@@ -5,11 +5,4 @@
     <c:out value="${requestScope.exception.message}"/>
 </p>
 
-<!--
-<% 
-Exception ex = (Exception) request.getAttribute("exception");
-ex.printStackTrace(new java.io.PrintWriter(out)); 
-%>
--->
-
 <a href="<c:url value='/'/>">&#171; Home</a>

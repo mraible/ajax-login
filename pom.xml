@@ -110,6 +110,7 @@
                 <configuration>
                     <webAppConfig>
                         <contextPath>/</contextPath>
+                        <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
