@@ -20,10 +20,7 @@
     <script type="text/javascript" src="${ctx}/scripts/app.js"></script>
     <decorator:head/>
 </head>
-<body>
-<div id="ajaxLoading" style="display: none; position: absolute; top: 0; right: 0; background: red; padding: 5px 10px; color: white">Loading...</div>
-<a name="top"></a>
-<div id="page">
+<body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
 
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
@@ -57,13 +54,13 @@
 
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span7">
+            <div class="span8">
                 <%@ include file="/messages.jsp"%>
                 <decorator:body/>
 
                 <decorator:getProperty property="page.underground"/>
             </div>
-            <div class="span2">
+            <div class="span4">
                 <div id="branding">
                     <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
                         <img src="${ctx}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
@@ -79,6 +76,7 @@
                     <li><a href="http://www.sitepen.com/blog/2008/07/22/windowname-transport/">window.name Transport</a></li>
                     <li><a href="http://stackoverflow.com/questions/1099787/jquery-ajax-post-sending-options-as-request-method-in-firefox">jQuery OPTIONS Request</a></li>
                 </ul>
+            </div>
         </div>
     </div>
 

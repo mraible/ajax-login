@@ -65,10 +65,10 @@
         <from>/webjars/**</from>
         <to>/webjars/$1</to>
     </rule>
-    <!--<rule>
+    <rule>
         <from>/login*</from>
         <to>/login.jsp$1</to>
-    </rule>-->
+    </rule>
     <!-- For Java EE Form Login -->
     <rule>
         <from>/login.jsp*</from>
