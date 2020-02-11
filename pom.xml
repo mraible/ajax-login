@@ -278,7 +278,7 @@
     <repositories>
         <repository>
             <id>appfuse-snapshots</id>
-            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+            <url>https://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -288,18 +288,18 @@
         </repository>
         <repository>
             <id>glassfish-repo</id>
-            <url>http://download.java.net/maven/glassfish</url>
+            <url>https://download.java.net/maven/glassfish</url>
         </repository>
         <repository>
             <id>spring-milestone</id>
-            <url>http://s3.amazonaws.com/maven.springframework.org/milestone</url>
+            <url>https://s3.amazonaws.com/maven.springframework.org/milestone</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
             <id>appfuse-snapshots</id>
-            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+            <url>https://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
